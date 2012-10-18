@@ -1,5 +1,5 @@
 PartymeterMobi::Application.routes.draw do
-  get "cities/new"
+  resources :cities
 
   root to: "static_pages#home"
 

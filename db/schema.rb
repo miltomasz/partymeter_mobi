@@ -20,6 +20,6 @@ ActiveRecord::Schema.define(:version => 20121014224954) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "cities", ["name"], :name => "index_cities_on_name", :unique => true
+  add_index "cities", ["name"], :name => "index_cities_on_name"
 
 end
