@@ -25,8 +25,20 @@ describe "StaticPages" do
     let(:heading)    { base_title }
     let(:page_title) { '' }
 
-    it_should_behave_like "all static pages"
     it { should_not have_selector('title', :text => full_title('Home')) }
+
+    describe "content" do
+      it { should have_selector('h1',    text: 'All cities') }
+
+      before(:all) { 10.times { FactoryGirl.create(:city) } }
+      after(:all) { City.delete_all }
+
+      it "should list each city" do
+        City.paginate(page: 1).each do |city|
+          page.should have_selector('li', text: city.name)
+        end
+      end
+    end
   end
 
   describe "Help page" do
