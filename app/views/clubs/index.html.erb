@@ -1,4 +1,6 @@
 <% provide(:title, @city.name) %>
+<% provide(:link, 'Add club') %>
+<% provide(:link_path, new_city_club_path(@city)) %>
 <div class="row">
   <aside class="span4">
     <section>
@@ -12,10 +14,9 @@
     <% if @city.clubs.any? %>
       <h3>Clubs (<%= @city.clubs.count %>)</h3>
       <ol class="clubs">
-        <%= render @clubs %>
+        <%= render @clubs, param_name: 'city_page'%>
       </ol>
-      <%= will_paginate @clubs %>
+      <%= will_paginate @clubs ,param_name: 'city_page' %>
     <% end %>
   </div>
 </div>
-  

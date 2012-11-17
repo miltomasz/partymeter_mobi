@@ -10,6 +10,12 @@ describe "StaticPages" do
     it { should have_selector('title', text: full_title(page_title)) }
   end
 
+  shared_examples_for "common links on header" do
+    it { should have_link('Home') }    
+    it { should have_link('Help') }    
+    it { should have_link('About') }    
+  end
+
   it "should have the right links on the layout" do
     visit root_path
     click_link "About"
@@ -26,6 +32,11 @@ describe "StaticPages" do
     let(:page_title) { '' }
 
     it { should_not have_selector('title', :text => full_title('Home')) }
+
+    it "should have 'Add city' link" do
+      click_link "Add city"
+      page.should have_selector 'title', text: full_title('Adding city')
+    end
 
     describe "content" do
       it { should have_selector('h1',    text: 'All cities') }
@@ -46,6 +57,15 @@ describe "StaticPages" do
 
     let(:heading)    { 'Help' }
     let(:page_title) { 'Help' }
+
+    it_should_behave_like "all static pages"
+  end
+
+  describe "Add city page" do
+    before { visit addcity_path }
+
+    let(:heading)    { 'Add city' }
+    let(:page_title) { 'Adding city' }
 
     it_should_behave_like "all static pages"
   end

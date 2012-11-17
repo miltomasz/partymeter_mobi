@@ -1,5 +1,7 @@
 PartymeterMobi::Application.routes.draw do
-  resources :cities
+  resources :cities do
+    resources :clubs 
+  end
 
   root to: "static_pages#home"
 

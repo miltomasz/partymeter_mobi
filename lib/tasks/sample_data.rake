@@ -9,5 +9,11 @@ namespace :db do
       City.create!(name: name,
                    country: country)
     end
+
+    cities = City.all(limit: 6)
+    50.times do
+      name = Faker::Lorem.sentence(1).slice(0..5)
+      cities.each { |city| city.clubs.create!(name: name) }
+    end
   end
 end

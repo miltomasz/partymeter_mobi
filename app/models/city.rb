@@ -14,4 +14,6 @@ class City < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 100 }, uniqueness: { scope: :country }
   validates :country, presence: true
+
+  has_many :clubs, dependent: :destroy
 end

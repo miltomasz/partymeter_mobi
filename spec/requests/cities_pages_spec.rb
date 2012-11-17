@@ -35,9 +35,18 @@ describe "Cities Pages" do
 
   describe "city show page" do
   	let(:city) { FactoryGirl.create(:city) }
+    let!(:club1) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
+    let!(:club2) { FactoryGirl.create(:club, city: city, name: "Lizard", address: "Piotrkowska 24", description: "Rock klub") }
+
     before { visit city_path(city) }
 
     it {should have_selector('h1', text: city.name) }
     it {should have_selector('title', text: city.name) }
+
+    describe "clubs" do
+      it { should have_content(club1.name) }
+      it { should have_content(club2.name) }
+      it { should have_content(city.clubs.count) }
+    end
   end
 end

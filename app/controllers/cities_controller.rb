@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
 	def show
     @city = City.find(params[:id])
+    @clubs = @city.clubs.paginate(page: params[:page])
 	end
 
   def new
