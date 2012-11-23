@@ -8,7 +8,7 @@ describe "ClubPages" do
   describe "club creation" do
     before { visit city_clubs_path(city) }
 
-    it { should have_link('Add club', href: new_city_club_path(city) ) }  	
+    it { should have_link('Add club', href: new_city_club_path(city)) }  	
 
     describe "getting new club form" do
       before { click_link "Add club" }
