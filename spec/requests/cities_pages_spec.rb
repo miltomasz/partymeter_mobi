@@ -6,7 +6,7 @@ describe "Cities Pages" do
   describe "page for adding new city" do
   	before { visit addcity_path }
 
-    it { should have_selector('h1',    text: 'Add city') }
+    it { should have_selector('h2',    text: 'Add city') }
     it { should have_selector('title', text: 'Adding city') }
   end
 

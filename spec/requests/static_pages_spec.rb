@@ -39,7 +39,7 @@ describe "StaticPages" do
     end
 
     describe "content" do
-      it { should have_selector('h1',    text: 'All cities') }
+      it { should have_selector('h2',    text: 'All cities') }
 
       before(:all) { 10.times { FactoryGirl.create(:city) } }
       after(:all) { City.delete_all }
@@ -67,7 +67,8 @@ describe "StaticPages" do
     let(:heading)    { 'Add city' }
     let(:page_title) { 'Adding city' }
 
-    it_should_behave_like "all static pages"
+    it { should have_selector('h2', text: heading) }
+    it { should have_selector('title', text: full_title(page_title)) }
   end
 
   describe "About page" do

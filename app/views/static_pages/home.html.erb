@@ -2,13 +2,15 @@
 <% provide(:link_path, addcity_path) %>
 <% provide(:show_link, true) %>
 <% provide(:title, 'All cities') %>
-<h1>All cities</h1>
+<h2>All cities</h2>
 
-<%= will_paginate @cities, param_name: 'city_page' %>
+<%= will_paginate @cities, param_name: 'city_page', inner_window: 0, outer_window: 0, 
+                           previous_label: '<', next_label: '>' %>
 
 <ul class="cities">
   <%= render @cities %>
 </ul>
 
-<%= will_paginate @cities, param_name: 'city_page' %>
+<%= will_paginate @cities, param_name: 'city_page', inner_window: 0, outer_window: 0,
+                           previous_label: '<', next_label: '>' %>
 
