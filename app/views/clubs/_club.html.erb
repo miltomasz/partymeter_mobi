@@ -1,5 +1,5 @@
 <li>
-  <span class="content"><%= club.name %></span>
+  <span class="content"><%= link_to club.name, city_club_path(club.city, club) %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(club.created_at) %> ago.
   </span>

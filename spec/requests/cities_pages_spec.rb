@@ -43,10 +43,14 @@ describe "Cities Pages" do
     it {should have_selector('h1', text: city.name) }
     it {should have_selector('title', text: city.name) }
 
-    describe "clubs" do
+    describe "clubs list" do
       it { should have_content(club1.name) }
       it { should have_content(club2.name) }
       it { should have_content(city.clubs.count) }
+    end
+
+    describe "link to club page" do
+      it { should have_link(club1.name, href: city_club_path(city, club1)) } 
     end
   end
 end

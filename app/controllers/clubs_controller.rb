@@ -20,6 +20,10 @@ class ClubsController < ApplicationController
     end
   end
 
+  def show
+    @club = Club.find(params[:id])
+  end
+
   def destroy
   end
 end

@@ -1,0 +1,14 @@
+<% provide(:title, @club.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @club %>
+	      <%= @club.name %>
+      </h1>
+      <span class="timestamp">
+    	  <%= @club.address %>
+      </span>
+    </section>
+  </aside>
+</div>

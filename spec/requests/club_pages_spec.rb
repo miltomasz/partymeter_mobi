@@ -35,7 +35,15 @@ describe "ClubPages" do
           expect { click_button "Add new club" }.to change(Club, :count).by(1)
         end
       end
-
     end
+  end
+
+  describe "showing club page" do
+    let!(:club1) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
+
+    before { visit city_club_path(city, club1) }
+
+    it { should have_selector('title', text: club1.name) }   
+    it { should have_content(club1.address) }   
   end
 end
