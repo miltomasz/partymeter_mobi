@@ -44,6 +44,10 @@ describe "ClubPages" do
     before { visit city_club_path(city, club1) }
 
     it { should have_selector('title', text: club1.name) }   
-    it { should have_content(club1.address) }   
+    it { should have_content(club1.address) } 
+
+    describe "header links content" do
+      it { should have_link('Add event') }
+    end 
   end
 end
