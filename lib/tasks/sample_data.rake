@@ -15,5 +15,13 @@ namespace :db do
       name = Faker::Lorem.sentence(1).slice(0..5)
       cities.each { |city| city.clubs.create!(name: name) }
     end
+
+    50.times do
+      name = Faker::Lorem.sentence(1).slice(0..10)
+      cities.each do |city| 
+        clubs = city.clubs.first(6)
+        clubs.each { |club| club.events.create!(name: name) }
+      end
+    end
   end
 end

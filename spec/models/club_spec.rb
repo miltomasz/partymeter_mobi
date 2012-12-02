@@ -16,6 +16,8 @@ describe Club do
   it { should respond_to(:city_id) }
   its(:city) { should == city }
 
+  it { should respond_to(:events) }
+
   it { should be_valid }
 
   describe "when city_id is not present" do
@@ -39,5 +41,20 @@ describe Club do
         Club.new(city_id: city.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end    
+  end
+
+  describe "club associations" do
+
+    before { @club.save }
+    let!(:older_event) do 
+      FactoryGirl.create(:event, club: @club, name: "Older", created_at: 1.day.ago)
+    end
+    let!(:newer_event) do
+      FactoryGirl.create(:event, club: @club, name: "Newer", created_at: 1.hour.ago)
+    end
+
+    it "should have the right clubs in the right order" do
+      @club.events.should == [newer_event, older_event]
+    end
   end
 end

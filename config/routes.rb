@@ -3,6 +3,10 @@ PartymeterMobi::Application.routes.draw do
     resources :clubs 
   end
 
+  scope "/clubs/:club_id" do
+    resources :events
+  end
+
   root to: "static_pages#home"
 
   match '/addcity',  to: 'cities#new' 

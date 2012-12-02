@@ -39,15 +39,27 @@ describe "ClubPages" do
   end
 
   describe "showing club page" do
-    let!(:club1) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
+    let!(:club) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
+    let!(:event1) { FactoryGirl.create(:event, club: club, name: "Hot Night Disco") }
+    let!(:event2) { FactoryGirl.create(:event, club: club, name: "Rock or die") }
 
-    before { visit city_club_path(city, club1) }
+    before { visit city_club_path(city, club) }
 
-    it { should have_selector('title', text: club1.name) }   
-    it { should have_content(club1.address) } 
+    it { should have_selector('title', text: club.name) }   
+    it { should have_content(club.address) } 
 
     describe "header links content" do
       it { should have_link('Add event') }
     end 
+
+    describe "events" do
+      it { should have_content(event1.name) }
+      it { should have_content(event2.name) }
+      it { should have_content(club.events.count) }
+    end
+
+     describe "link to event page" do
+      it { should have_link(event2.name, href: event_path(club, event2)) } 
+    end
   end
 end

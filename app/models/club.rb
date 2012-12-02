@@ -6,6 +6,7 @@ class Club < ActiveRecord::Base
   validates :description, length: { maximum: 140 }
 
   belongs_to :city
+  has_many :events
 
   default_scope order: 'clubs.created_at DESC'
 end

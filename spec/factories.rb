@@ -11,4 +11,10 @@ FactoryGirl.define do
     address "Pulawska 3"
     city
   end
+
+  factory :event do
+    name "Hot Saturday's Night"
+    description "Sooper cool party!"
+    club
+  end
 end

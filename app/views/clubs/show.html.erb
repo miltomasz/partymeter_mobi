@@ -1,6 +1,6 @@
 <% provide(:title, @club.name) %>
 <% provide(:link, 'Add event') %>
-<% provide(:link_path, '#') %>
+<% provide(:link_path, new_event_path(@club)) %>
 <% provide(:show_link, true) %>
 <div class="row">
   <aside class="span4">
@@ -14,4 +14,13 @@
       </span>
     </section>
   </aside>
+  <div class="span8">
+    <% if @club.events.any? %>
+      <h3>Events (<%= @club.events.count %>)</h3>
+      <ol class="events">
+        <%= render @events %>
+      </ol>
+      <%= will_paginate @events %>
+    <% end %>
+  </div>
 </div>
