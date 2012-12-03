@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+ class Event < ActiveRecord::Base
   attr_accessible :description, :event_date, :name, :thumbdown, :thumbup
   belongs_to :club
   

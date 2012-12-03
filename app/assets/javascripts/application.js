@@ -14,3 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+window.addEventListener("load",function() {
+    setTimeout(function(){
+        window.scrollTo(0, 1);
+    }, 0);
+});

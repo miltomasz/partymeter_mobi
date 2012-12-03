@@ -26,7 +26,7 @@ describe "EventPages" do
 
         describe "error messages" do
           before { click_button "Add new event" }
-          it { should have_content('error') } 
+          it { should have_content("Name can't be blank") } 
         end
       end
 
