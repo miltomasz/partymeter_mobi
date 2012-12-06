@@ -1,3 +1,3 @@
-# Partymeter - for measuring the atmosphere and awsomeness in the clubs
+# Partymeter - measuring the atmosphere and awsomeness in clubs
 
-The app is simply for tracking events and parties in various clubs, pubs and restaurants. User can vote yes or no for a given event.
+The app is designed for tracking events and parties in clubs, pubs and restaurants. User can vote yes or no for a given event.
