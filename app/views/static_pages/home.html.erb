@@ -4,6 +4,8 @@
 <% provide(:title, 'All cities') %>
 <h2>All cities</h2>
 
+<p id="demo"></p>
+
 <%= will_paginate @cities, param_name: 'city_page', inner_window: 0, outer_window: 0, 
                            previous_label: '<', next_label: '>' %>
 

@@ -5,13 +5,14 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
+      <section>
         <%= gravatar_for @club %>
-	      <%= @club.name %>
-      </h1>
-      <span class="timestamp">
-    	  <%= @club.address %>
-      </span>
+	      <h1><%= @club.name %></h1>
+        <span><%= @club.address %></span>
+      </section>
+      <section>
+        <%= link_to "Add new event", '#', class: "btn btn-large btn-primary" %>
+      </section>
     </section>
   </aside>
   <div class="span8">
