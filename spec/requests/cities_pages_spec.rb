@@ -46,6 +46,8 @@ describe "Cities Pages" do
     describe "clubs list" do
       it { should have_content(club1.name) }
       it { should have_content(club2.name) }
+      it { should have_content(club1.address) }
+      it { should have_content(club2.address) }
       it { should have_content(city.clubs.count) }
     end
 

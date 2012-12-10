@@ -5,9 +5,7 @@ describe ClubsHelper do
     let(:current_date) { DateTime.new(2012, 10, 10, 14, 50, 50) }
     
     context "event is nil (not created)" do
-      before do 
-        @event = nil
-      end
+      before { @event = nil }
 
       it "should show button" do
         event_button?(@event, current_date).should == true

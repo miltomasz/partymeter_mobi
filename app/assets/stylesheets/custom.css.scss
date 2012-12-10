@@ -210,9 +210,12 @@ input, textarea, select, .uneditable-input {
 .content {
   display: block;
 }
+
 .timestamp {
   color: $grayLight;
+  font-size: 10px;
 }
+
 .gravatar {
   float: left;
   margin-right: 10px;
@@ -222,4 +225,8 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+h3 {
+  text-align: right;
 }
