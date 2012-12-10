@@ -6,7 +6,25 @@ module ClubsHelper
   end
 
   def event_button?(event, current_date)
-  	return true if event.nil? || (event.created_at.hour <= 6 && current_date.hour > 6)
+    if event.nil?
+      return true
+    end
+
+    if event.created_at.yday < current_date.yday
+      if current_date.hour <= 6
+        if event.created_at.hour <= 6
+          return true
+        else
+          return false
+        end
+      end
+      return true
+    end
+
+    if event.created_at.hour <= 6 && current_date.hour > 6
+      return true
+    end
+
   	false
   end
 end

@@ -10,9 +10,11 @@
 	      <h1><%= @club.name %></h1>
         <span><%= @club.address %></span>
       </section>
-      <section>
-        <%= link_to "Add new event", '#', class: "btn btn-large btn-primary" %>
-      </section>
+      <% if event_button?(@club.events.last, Time.now.to_datetime) %>
+        <section>
+          <%= link_to "Add new event", '#', class: "btn btn-large btn-primary" %>
+        </section>
+      <% end %>
     </section>
   </aside>
   <div class="span8">

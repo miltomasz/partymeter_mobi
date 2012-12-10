@@ -69,12 +69,5 @@ describe "ClubPages" do
      describe "link to event page" do
       it { should have_link(event2.name, href: event_path(club, event2)) } 
     end
-
-    describe "button for adding event" do
-      let(:current_date) { Date.new(2012, 10, 10, 11, 0, 0) }
-      
-      before { }
-      it { should have_link("Add new event") }
-    end
   end
 end

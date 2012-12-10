@@ -13,7 +13,8 @@ namespace :db do
     cities = City.all(limit: 6)
     50.times do
       name = Faker::Lorem.sentence(1).slice(0..5)
-      cities.each { |city| city.clubs.create!(name: name) }
+      address = Faker::Lorem.sentence(2).slice(0..10) + " #{rand(100)}"
+      cities.each { |city| city.clubs.create!(name: name, address: address) }
     end
 
     50.times do
