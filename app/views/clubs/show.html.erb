@@ -1,29 +1,28 @@
 <% provide(:title, @club.name) %>
-<% provide(:link, 'Add event') %>
-<% provide(:link_path, new_event_path(@club)) %>
-<% provide(:show_link, true) %>
 <div class="row">
   <aside class="span4">
     <section>
-      <section>
         <%= gravatar_for @club %>
 	      <h1><%= @club.name %></h1>
         <span><%= @club.address %></span>
-      </section>
-      <% if event_button?(@club.events.first, Time.now.to_datetime) %>
-        <section>
-          <%= link_to "Add new event", '#', class: "btn btn-large btn-primary" %>
-        </section>
-      <% end %>
     </section>
   </aside>
   <div class="span8">
-    <% if @club.events.any? %>
-      <h3>Events (<%= @club.events.count %>)</h3>
+    <% if event_button?(@club.events.first, Time.now.to_datetime) %>
+      <%= link_to "Create event", new_event_path(@club), class: "btn btn-large btn-primary btn-large-partymeter" %>
+    <% else %>
+      <h3>Today's event</h3>
       <ol class="events">
-        <%= render @events %>
+        <li>
+          <span class="content"><%= @club.events.first.name %></span>
+          <span class="timestamp"><%= @club.events.first.description %></span>
+        </li>
       </ol>
-      <%= will_paginate @events %>
+
+      <div class="btn-group">
+        <%= link_to "Thumb up", thumbup_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
+        <%= link_to "Thumb down", thumbdown_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>

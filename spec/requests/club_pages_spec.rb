@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'rspec/mocks'
+require 'rspec/mocks/standalone'
 
 describe "ClubPages" do
   
@@ -48,26 +50,52 @@ describe "ClubPages" do
 
   describe "showing club page" do
     let!(:club) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
-    let!(:event1) { FactoryGirl.create(:event, club: club, name: "Hot Night Disco") }
-    let!(:event2) { FactoryGirl.create(:event, club: club, name: "Rock or die") }
+    let!(:event1) { FactoryGirl.create(:event, club: club, name: "Hot Night Disco", created_at: DateTime.new(2012, 10, 10, 11, 00, 00)) }
+    let!(:event2) { FactoryGirl.create(:event, club: club, name: "Rock or die", created_at: DateTime.new(2012, 10, 8, 11, 00, 00)) }
 
-    before { visit city_club_path(city, club) }
+    before(:each) do
+      # ClubsController.stub!(:event_button?).and_return(false)
+      visit city_club_path(city, club)
+    end
 
     it { should have_selector('title', text: club.name) }   
     it { should have_content(club.address) } 
 
-    describe "header links content" do
-      it { should have_link('Add event') }
-    end 
-
-    describe "events" do
-      it { should have_content(event1.name) }
-      it { should have_content(event2.name) }
-      it { should have_content(club.events.count) }
+    describe "when event is not created" do
+      # it { should have_link("Create event") }
     end
+    
+    describe "when event is already created" do
+      it { should have_selector('h3', text: "Today's event") }   
+      it { should have_content(event1.name) }
+      it { should have_content(event1.description) }
+      it { should have_link('Thumb up', href: thumbup_event_path(club, club.events.first)) }   
+      it { should have_link('Thumb down', href: thumbdown_event_path(club, club.events.first)) }  
 
-     describe "link to event page" do
-      it { should have_link(event2.name, href: event_path(club, event2)) } 
+      describe "voting yes" do
+        let(:thumbup_count) { 0 }
+        before { click_link "Thumb up" }
+
+        it { should have_selector('div.alert.alert-success') }
+        specify { event1.reload.thumbup.should == (thumbup_count + 1) }
+      end 
+
+      describe "voting no" do
+        let(:thumbdown_count) { 0 }
+        before { click_link "Thumb down" }
+
+        it { should have_selector('div.alert.alert-success') }
+        specify { event1.reload.thumbdown.should == (thumbdown_count + 1) }        
+      end
+
+      describe "voting yes or no and error occured" do
+        before (:each) do
+          Event.any_instance.stub(:update_attributes).and_return(false)
+          click_link "Thumb down"
+        end
+
+        it { should have_selector('div.alert.alert-error') }
+      end
     end
   end
 end

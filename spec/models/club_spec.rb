@@ -56,5 +56,9 @@ describe Club do
     it "should have the right clubs in the right order" do
       @club.events.should == [newer_event, older_event]
     end
+
+    it "should get the last added event" do
+      @club.events.first == newer_event
+    end
   end
 end

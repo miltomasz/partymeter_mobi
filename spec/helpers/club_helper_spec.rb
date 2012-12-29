@@ -42,7 +42,7 @@ describe ClubsHelper do
       end
     end
 
-    context "event is create one day ago or more" do
+    context "event is create one day ago" do
       before do
         @event = Event.new
         @event.created_at = DateTime.new(2012, 10, 10, 13, 30, 00).to_time.yesterday
@@ -65,6 +65,25 @@ describe ClubsHelper do
 
         it "should not show button" do
           event_button?(@event, current_date).should == false
+        end
+      end
+    end
+
+    context "event is create three or more days ago" do
+      before do
+        @event = Event.new
+        @event.created_at = DateTime.new(2012, 10, 7, 16, 30, 00).to_time
+      end
+
+      it "should show button" do
+        event_button?(@event, current_date).should == true
+      end
+
+      describe "current hour is before 6 am" do
+        current_date = DateTime.new(2012, 10, 10, 0, 30, 00)
+
+        it "should not show button" do
+          event_button?(@event, current_date).should == true
         end
       end
     end

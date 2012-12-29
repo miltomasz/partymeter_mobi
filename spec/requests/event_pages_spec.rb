@@ -11,10 +11,10 @@ describe "EventPages" do
   describe "event creation" do
     before { visit city_club_path(city, club) }
 
-    it { should have_link('Add event', href: new_event_path(club)) }  	
+    it { should have_link('Create event', href: new_event_path(club)) }  	
 
     describe "getting new event form" do
-      before { click_link "Add event" }
+      before { click_link "Create event" }
       
       it { should have_selector('h1', text: 'Add event') }
       it { should have_button('Add new event') }

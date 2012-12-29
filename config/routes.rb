@@ -4,7 +4,11 @@ PartymeterMobi::Application.routes.draw do
   end
 
   scope "/clubs/:club_id" do
-    resources :events
+    resources :events do
+      member do
+        get :thumbup, :thumbdown
+      end
+    end
   end
 
   root to: "static_pages#home"

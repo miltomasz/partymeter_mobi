@@ -1,4 +1,6 @@
 module ClubsHelper
+  NEW_EVENT_START = 6
+  
 	def gravatar_for(club, options = { size: 50 })
 		size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/1?s=#{size}"
@@ -10,18 +12,25 @@ module ClubsHelper
       return true
     end
 
-    if event.created_at.yday < current_date.yday
-      if current_date.hour <= 6
-        if event.created_at.hour <= 6
+    if current_date.yday - event.created_at.yday == 1
+      if current_date.hour <= NEW_EVENT_START
+        if event.created_at.hour <= NEW_EVENT_START
           return true
         else
           return false
         end
+      else
+        return true
       end
-      return true
     end
 
-    if event.created_at.hour <= 6 && current_date.hour > 6
+    if current_date.yday == event.created_at.yday
+      if event.created_at.hour <= NEW_EVENT_START && current_date.hour > NEW_EVENT_START
+        return true
+      end
+    end
+
+    if current_date.yday - event.created_at.yday > 1
       return true
     end
 
