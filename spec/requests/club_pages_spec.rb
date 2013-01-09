@@ -53,6 +53,12 @@ describe "ClubPages" do
     let!(:event1) { FactoryGirl.create(:event, club: club, name: "Hot Night Disco", created_at: DateTime.new(2012, 10, 10, 11, 00, 00)) }
     let!(:event2) { FactoryGirl.create(:event, club: club, name: "Rock or die", created_at: DateTime.new(2012, 10, 8, 11, 00, 00)) }
 
+    let!(:comment1) { FactoryGirl.create(:comment, event: event1, author: "Tom", content: "Bla Bla blaaa", 
+                                            created_at: DateTime.new(2012, 10, 10, 11, 00, 00)) }
+    let!(:comment2) { FactoryGirl.create(:comment, event: event1, author: "Jan", content: "BGruooo",
+                                            created_at: DateTime.new(2012, 10, 10, 12, 00, 00)) }
+
+
     before(:each) do
       # ClubsController.stub!(:event_button?).and_return(false)
       visit city_club_path(city, club)
@@ -71,6 +77,7 @@ describe "ClubPages" do
       it { should have_content(event1.description) }
       it { should have_link('Thumb up', href: thumbup_event_path(club, club.events.first)) }   
       it { should have_link('Thumb down', href: thumbdown_event_path(club, club.events.first)) }  
+      it { should have_link('Comment') }  
 
       describe "voting yes" do
         let(:thumbup_count) { 0 }
@@ -88,7 +95,7 @@ describe "ClubPages" do
         specify { event1.reload.thumbdown.should == (thumbdown_count + 1) }        
       end
 
-      describe "voting yes or no and error occured" do
+      describe "voting yes or no with exception raised at updating" do
         before (:each) do
           Event.any_instance.stub(:update_attributes).and_return(false)
           click_link "Thumb down"
@@ -96,6 +103,25 @@ describe "ClubPages" do
 
         it { should have_selector('div.alert.alert-error') }
       end
+
+      describe "clicking comment" do
+        before { click_link "Comment" }
+
+        it { should have_selector("div.modal.hide.fade") }
+      end
+    end
+
+    describe "comments part" do
+      let!(:comment1) { FactoryGirl.create(:comment, event: event1, author: "Tom", content: "Bla Bla blaaa", 
+                                            created_at: DateTime.new(2012, 10, 10, 11, 00, 00)) }
+      let!(:comment2) { FactoryGirl.create(:comment, event: event1, author: "Jan", content: "BGruooo",
+                                            created_at: DateTime.new(2012, 10, 10, 12, 00, 00)) }
+
+      
+      it { should have_selector('h3', text: "Comments") }   
+      it { should have_content(comment1.author) }
+      it { should have_content(comment1.content) }
+      # it { should have_content(comment1.content) }
     end
   end
 end

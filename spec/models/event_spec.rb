@@ -15,6 +15,7 @@ describe Event do
   it { should respond_to(:thumbup) }
   it { should respond_to(:thumbdown) }
   it { should respond_to(:club_id) }
+  it { should respond_to(:comments) }
 
   it { should respond_to(:club) }
   its(:club) { should == club }
@@ -47,5 +48,29 @@ describe Event do
         Event.new(club_id: club.id)
       end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
     end    
+  end
+
+  describe "comments associations" do
+    before { @event.save }
+    
+    let!(:older_comment) do 
+      FactoryGirl.create(:comment, event: @event, created_at: 1.day.ago)
+    end
+    let!(:newer_comment) do
+      FactoryGirl.create(:comment, event: @event, created_at: 1.hour.ago)
+    end
+
+    it "should have the right comments in the right order" do
+      @event.comments.should == [newer_comment, older_comment]
+    end
+
+    it "should destroy associated comments" do
+      comments = @event.comments.dup
+      @event.destroy
+      comments.should_not be_empty
+      comments.each do |comment|
+        Comment.find_by_id(comment.id).should be_nil
+      end
+    end
   end
 end

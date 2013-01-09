@@ -87,5 +87,50 @@ describe ClubsHelper do
         end
       end
     end
+
+    context "event is created in a previous year 1 day ago" do
+      before do
+        @event = Event.new
+        @event.created_at = DateTime.new(2012, 12, 31, 16, 30, 00).to_time
+      end
+
+      context "current time is after 6 am" do
+        let(:current_date) { DateTime.new(2013, 01, 01, 14, 50, 50) }
+
+        it "should show button" do
+          event_button?(@event, current_date).should == true
+        end
+      end
+
+      context "current time is before 6 am" do
+        let(:current_date) { DateTime.new(2013, 01, 01, 5, 50, 50) }
+
+        it "should not show button" do
+          event_button?(@event, current_date).should == false
+        end
+      end
+
+      context "current time is after 6 am and event created before 6 am" do
+        let(:current_date) { DateTime.new(2013, 01, 01, 6, 30, 50) }
+        before { @event.created_at = DateTime.new(2012, 12, 31, 5, 30, 00).to_time }
+
+        it "should show button" do
+          event_button?(@event, current_date).should == true
+        end
+      end
+    end
+
+    context "event is created in a previous year more than 1 day ago" do
+      before do
+        @event = Event.new
+        @event.created_at = DateTime.new(2012, 12, 30, 16, 30, 00).to_time
+      end
+
+      let(:current_date) { DateTime.new(2013, 01, 01, 14, 50, 50) }
+
+      it "should show button" do
+        event_button?(@event, current_date).should == true
+      end
+    end
   end
 end

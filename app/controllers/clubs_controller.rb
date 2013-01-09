@@ -23,6 +23,7 @@ class ClubsController < ApplicationController
   def show
     @club = Club.find(params[:id])
     @events = @club.events.paginate(page: params[:page])
+    @comments = @events.first.comments if @events.any?
   end
 
   def destroy

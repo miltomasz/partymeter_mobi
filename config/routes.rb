@@ -6,7 +6,7 @@ PartymeterMobi::Application.routes.draw do
   scope "/clubs/:club_id" do
     resources :events do
       member do
-        get :thumbup, :thumbdown
+        get :thumbup, :thumbdown, :comment
       end
     end
   end

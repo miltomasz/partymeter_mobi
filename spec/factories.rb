@@ -17,4 +17,10 @@ FactoryGirl.define do
     description "Sooper cool party!"
     club
   end
+
+  factory :comment do
+    content "This is content"
+    author "Jan"
+    event
+  end
 end

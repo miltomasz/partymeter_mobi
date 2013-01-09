@@ -196,9 +196,9 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-/* clubs, events */
+/* clubs, events, comments */
 
-.clubs, .events {
+.clubs, .events, .comments {
   list-style: none;
   margin: 10px 0 0 0;
 
@@ -233,4 +233,11 @@ h3 {
 
 .btn-large-partymeter {
   width: 90%;
+}
+
+/* Overriding modal box (fade in) style */
+
+.modal.fade.in {
+  margin-top: -25%;
+  top: 50%;
 }
