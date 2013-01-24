@@ -11,6 +11,8 @@ PartymeterMobi::Application.routes.draw do
     end
   end
 
+  resources :comments, only: [:create, :new]
+
   root to: "static_pages#home"
 
   match '/addcity',  to: 'cities#new' 

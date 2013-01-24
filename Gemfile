@@ -5,6 +5,7 @@ gem 'bootstrap-sass', '2.0.4'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6'
+gem 'client_side_validations'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

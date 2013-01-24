@@ -1,4 +1,4 @@
-  <% provide(:title, @club.name) %>
+<% provide(:title, @club.name) %>
 <div class="row">
   <aside class="span4">
     <section>
@@ -8,7 +8,7 @@
     </section>
   </aside>
   <div class="span8">
-    <% self.stub(:event_button?).and_return(false) %>
+    
     <% if event_button?(@club.events.first, Time.now.to_datetime) %>
       <%= link_to "Create event", new_event_path(@club), class: "btn btn-large btn-primary btn-large-partymeter" %>
     <% else %>
@@ -23,7 +23,7 @@
       <div class="btn-group">
         <%= link_to "Thumb up", thumbup_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
         <%= link_to "Thumb down", thumbdown_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
-        <a href="#myModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Comment</a>
+        <%= link_to "Comment", new_comment_path(event_id: @club.events.first.id), class: "btn btn-large btn-primary"%>
       </div>
       
       <% if @club.events.first.comments.any? %>
@@ -34,20 +34,5 @@
       <% end %>
   
     <% end %>
-  </div>
-</div>
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Save changes</button>
   </div>
 </div>

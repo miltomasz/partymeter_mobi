@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require rails.validations
 
 window.addEventListener("load",function() {
     setTimeout(function(){
@@ -34,4 +35,5 @@ function showPosition(position) {
     console.log("Latitude: " + position.coords.latitude + 
   ". Longitude: " + position.coords.longitude);	
 }
+
 
