@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Comment do
   let(:event) { FactoryGirl.create(:event) }
   before do
-    # This code is wrong!
     @comment = event.comments.build(content: "Lorem ipsum", author: "Tomek")
   end
 

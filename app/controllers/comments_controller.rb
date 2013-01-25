@@ -6,21 +6,14 @@ class CommentsController < ApplicationController
 
   def create
     @event = Event.find(params[:comment][:event_id])
+    @comment = @event.comments.build({ author: params[:comment][:author], 
+                                       content: params[:comment][:content] })
 
-    author = params[:comment][:author]
-    content = params[:comment][:content]
-
-    @comment = @event.comments.build({ author: author, content: content })
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to city_club_path(@event.club.city, @event.club), notice: 'Comment added!' }
-        format.json { render json: { :result => 'success',  :redirect => city_club_path(@event.club.city, @event.club) } }
-      else
-        format.html { render 'new' }
-        format.json { render json: @comment.errors, status: :unprocessable_entity, content_type: 'text/json' }
-      end
+    if @comment.save
+      flash[:success] = "Comment added!"
+      redirect_to city_club_path(@event.club.city, @event.club)
+    else
+      render 'new'
     end
-
   end
 end

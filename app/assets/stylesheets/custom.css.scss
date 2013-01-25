@@ -235,9 +235,20 @@ h3 {
   width: 90%;
 }
 
-/* Overriding modal box (fade in) style */
+/* Overriding modal styles */
 
 .modal.fade.in {
   margin-top: -25%;
   top: 50%;
+}
+
+.modal-footer-add-comment {
+  text-align: center;
+}
+
+.btn-group-partymeter {
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: 12%;
+  margin-right: 12%;
 }

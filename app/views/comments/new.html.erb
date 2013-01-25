@@ -8,23 +8,18 @@
 
   <%= form_for(@comment) do |f| %>
     <div class="modal-body">
-      <%= f.object.errors.full_messages %>
       <%= render 'shared/error_messages', object: f.object %>
-        
-      <div class="field"> 
           <%= f.label :author %>
           <%= f.text_field :author %>
           
           <%= f.label :content %>
-          <%= f.text_area :content, placeholder: "Compose new comment..." %>
+          <%= f.text_area :content, placeholder: "Compose new comment...", size: "40x4" %>
         
           <%= f.hidden_field :event_id, value: @comment.event.id %>  
-      </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <%= link_to "Close", city_club_path(@comment.event.club.city, @comment.event.club), class: "btn"%>
-      <%= f.submit "Add comment", class: "btn btn-primary" %>
+    <div class="modal-footer modal-footer-add-comment">
+      <%= link_to "Close", city_club_path(@comment.event.club.city, @comment.event.club), style: "width: 37%", class: "btn btn-large"%>
+      <%= f.submit "Add comment", class: "btn btn-large btn-primary", style: "width: 48%" %>
     </div>
   <% end %>
 </div>

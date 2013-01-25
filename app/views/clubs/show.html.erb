@@ -20,10 +20,10 @@
         </li>
       </ol>
       
-      <div class="btn-group">
-        <%= link_to "Thumb up", thumbup_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
-        <%= link_to "Thumb down", thumbdown_event_path(@club, @club.events.first), class: "btn btn-large btn-primary" %>
-        <%= link_to "Comment", new_comment_path(event_id: @club.events.first.id), class: "btn btn-large btn-primary"%>
+      <div class="btn-group btn-group-partymeter">
+        <%= link_to image_tag('thumb_up.png', alt: 'Thumb up!', class: "gravatar"), thumbup_event_path(@club, @club.events.first), class: "btn btn-large" %>
+        <%= link_to image_tag('thumb_down.png', alt: 'Thumb down!', class: "gravatar"), thumbdown_event_path(@club, @club.events.first), class: "btn btn-large" %>
+        <%= link_to image_tag('add_comment_icon.png', alt: 'Add comment', class: "gravatar"), new_comment_path(event_id: @club.events.first.id), class: "btn btn-large"%>
       </div>
       
       <% if @club.events.first.comments.any? %>
