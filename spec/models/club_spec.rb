@@ -44,8 +44,8 @@ describe Club do
   end
 
   describe "club associations" do
-
     before { @club.save }
+    
     let!(:older_event) do 
       FactoryGirl.create(:event, club: @club, name: "Older", created_at: 1.day.ago)
     end

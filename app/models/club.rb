@@ -9,5 +9,5 @@ class Club < ActiveRecord::Base
   belongs_to :city
   has_many :events
 
-  default_scope order: 'clubs.created_at DESC'
+  default_scope order: 'created_at DESC'
 end

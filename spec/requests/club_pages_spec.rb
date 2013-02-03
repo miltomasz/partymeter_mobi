@@ -77,7 +77,7 @@ describe "ClubPages" do
       it { should have_content(event1.description) }
       it { should have_link('Thumb up', href: thumbup_event_path(club, club.events.first)) }   
       it { should have_link('Thumb down', href: thumbdown_event_path(club, club.events.first)) }  
-      it { should have_link('Comment') }  
+      it { should have_link('Comment', href: new_comment_path(event_id: club.events.first.id)) }  
 
       describe "voting yes" do
         let(:thumbup_count) { 0 }
@@ -107,7 +107,7 @@ describe "ClubPages" do
       describe "clicking comment" do
         before { click_link "Comment" }
 
-        it { should have_selector("div.modal.hide.fade") }
+        it { should have_selector("div#myModal") }
       end
     end
 
@@ -117,11 +117,9 @@ describe "ClubPages" do
       let!(:comment2) { FactoryGirl.create(:comment, event: event1, author: "Jan", content: "BGruooo",
                                             created_at: DateTime.new(2012, 10, 10, 12, 00, 00)) }
 
-      
       it { should have_selector('h3', text: "Comments") }   
       it { should have_content(comment1.author) }
       it { should have_content(comment1.content) }
-      # it { should have_content(comment1.content) }
     end
   end
 end

@@ -16,4 +16,14 @@ class City < ActiveRecord::Base
   validates :country, presence: true
 
   has_many :clubs, dependent: :destroy
+
+  def sorted_clubs
+    clubs.sort do |c1, c2|
+      unless c1.events.empty? || c2.events.empty?
+        c2.events.first.thumbup <=> c1.events.first.thumbup
+      else
+        0
+      end
+    end
+  end
 end

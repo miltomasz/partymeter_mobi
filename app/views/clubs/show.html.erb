@@ -8,7 +8,7 @@
     </section>
   </aside>
   <div class="span8">
-    
+
     <% if event_button?(@club.events.first, Time.now.to_datetime) %>
       <%= link_to "Create event", new_event_path(@club), class: "btn btn-large btn-primary btn-large-partymeter" %>
     <% else %>
@@ -23,7 +23,7 @@
       <div class="btn-group btn-group-partymeter">
         <%= link_to image_tag('thumb_up.png', alt: 'Thumb up!', class: "gravatar"), thumbup_event_path(@club, @club.events.first), class: "btn btn-large" %>
         <%= link_to image_tag('thumb_down.png', alt: 'Thumb down!', class: "gravatar"), thumbdown_event_path(@club, @club.events.first), class: "btn btn-large" %>
-        <%= link_to image_tag('add_comment_icon.png', alt: 'Add comment', class: "gravatar"), new_comment_path(event_id: @club.events.first.id), class: "btn btn-large"%>
+        <%= link_to image_tag('add_comment_icon.png', alt: 'Add comment', class: "gravatar"), new_comment_path(event_id: @club.events.first.id), id: "Comment", class: "btn btn-large"%>
       </div>
       
       <% if @club.events.first.comments.any? %>

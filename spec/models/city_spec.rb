@@ -68,19 +68,17 @@ describe City do
   end
 
   describe "clubs associations" do
-
     before { @city.save }
 
-    let!(:older_club) do 
-      FactoryGirl.create(:club, city: @city, created_at: 1.day.ago)
-    end
+    let!(:club1) { FactoryGirl.create(:club, city: @city, created_at: 10.days.ago) }
+    let!(:club2) { FactoryGirl.create(:club, city: @city, created_at: 10.days.ago) }
 
-    let!(:newer_club) do
-      FactoryGirl.create(:club, city: @city, created_at: 1.hour.ago)
-    end
+    let!(:event1) { FactoryGirl.create(:event, club: club1, thumbup: 10) }
+    let!(:event2) { FactoryGirl.create(:event, club: club2, created_at: 2.days.ago, thumbup: 9) }
+    let!(:event3) { FactoryGirl.create(:event, club: club2, created_at: 1.day.ago, thumbup: 11) }
 
     it "should have the right clubs in the right order" do
-      @city.clubs.should == [newer_club, older_club]
+      @city.sorted_clubs.should == [club2, club1]
     end
 
     it "should destroy associated clubs" do
