@@ -18,14 +18,24 @@ class City < ActiveRecord::Base
   has_many :clubs, dependent: :destroy, include: :events
 
   def sorted_clubs
-    checking_nil = lambda { |c| c.events.first.nil? || c.events.first.thumbup.nil? }
-
     clubs.sort! do |club1, club2|
-      if checking_nil.call(club1) || checking_nil.call(club2)
-        1
-      else
-        club2.events.first.thumbup <=> club1.events.first.thumbup
+      if club1.events.first.nil?
+        club1.events.build(thumbup: 0)
       end
+
+      if club2.events.first.nil?
+        club2.events.build(thumbup: 0)
+      end
+
+      if club1.events.first.thumbup.nil?
+        club1.events.first.thumbup = 0
+      end
+
+      if club2.events.first.thumbup.nil?
+        club2.events.first.thumbup = 0
+      end
+        
+      club2.events.first.thumbup <=> club1.events.first.thumbup
     end
   end
 end
