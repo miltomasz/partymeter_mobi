@@ -15,14 +15,16 @@ class City < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 100 }, uniqueness: { scope: :country }
   validates :country, presence: true
 
-  has_many :clubs, dependent: :destroy
+  has_many :clubs, dependent: :destroy, include: :events
 
   def sorted_clubs
-    clubs.sort do |c1, c2|
-      unless c1.events.empty? || c2.events.empty?
-        c2.events.first.thumbup <=> c1.events.first.thumbup
+    checking_nil = lambda { |c| c.events.first.nil? || c.events.first.thumbup.nil? }
+
+    clubs.sort! do |club1, club2|
+      if checking_nil.call(club1) || checking_nil.call(club2)
+        1
       else
-        0
+        club2.events.first.thumbup <=> club1.events.first.thumbup
       end
     end
   end
