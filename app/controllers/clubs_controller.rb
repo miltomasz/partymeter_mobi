@@ -2,7 +2,6 @@ require 'will_paginate/array'
 
 class ClubsController < ApplicationController
   def index
-    puts "-------- index"
     @city = City.find(params[:city_id])
     @clubs = @city.sorted_clubs.paginate(page: params[:city_page], per_page: 10)
   end

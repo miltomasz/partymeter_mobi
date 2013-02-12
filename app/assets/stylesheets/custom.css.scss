@@ -207,6 +207,11 @@ input, textarea, select, .uneditable-input {
     border-top: 1px solid #e8e8e8;
   }
 }
+
+.clubs li {
+  margin-bottom: 5px;
+}
+
 .content {
   display: block;
 }
@@ -249,6 +254,18 @@ h3 {
 .btn-group-partymeter {
   margin-bottom: 10px;
   text-align: center;
-  margin-left: 12%;
-  margin-right: 12%;
+}
+
+.club-left-aside {
+  width: auto;
+  float: left;
+}
+
+.club-right-aside {
+  padding-right: 10%;
+  padding-left: 41%;
+}
+
+.thumb {
+  padding-right: 10px;
 }

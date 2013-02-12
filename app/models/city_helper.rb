@@ -2,12 +2,12 @@ module CityHelper
   def sorted_clubs
     clubs.sort! do |club1, club2|
       if club1.events.first.nil?
-        club1.events.build(thumbup: 0)
+        club1.events.build()
         club1.events.first.created_at = Time.now
       end
 
       if club2.events.first.nil?
-        club2.events.build(thumbup: 0)
+        club2.events.build()
         club2.events.first.created_at = Time.now
       end
 

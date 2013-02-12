@@ -38,6 +38,9 @@ describe "Cities Pages" do
     let!(:club1) { FactoryGirl.create(:club, city: city, name: "Fanaberia", address: "Traugutta 2", description: "Ok klub") }
     let!(:club2) { FactoryGirl.create(:club, city: city, name: "Lizard", address: "Piotrkowska 24", description: "Rock klub") }
 
+    let!(:event1) { FactoryGirl.create(:event, club: club1, name: "Hot Night Disco", thumbup: 1) }
+    let!(:event2) { FactoryGirl.create(:event, club: club2, name: "Rock or die", thumbdown: 0) }
+
     before { visit city_path(city) }
 
     it {should have_selector('h1', text: city.name) }
@@ -49,6 +52,8 @@ describe "Cities Pages" do
       it { should have_content(club1.address) }
       it { should have_content(club2.address) }
       it { should have_content(city.clubs.count) }
+      it { should have_selector('span', text: "+1")}
+      it { should have_selector('span', text: "-0")}
     end
 
     describe "link to club page" do

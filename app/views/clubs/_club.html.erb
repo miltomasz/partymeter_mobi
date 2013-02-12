@@ -1,11 +1,29 @@
 <li>
-  <span class="content">
-  	<%= link_to club.name, city_club_path(club.city, club) %>
-  </span>
-   <span class="content">
-  	<%= club.address %>
-  </span>
-  <span class="timestamp">
-    Added <%= time_ago_in_words(club.created_at) %> ago.
-  </span>
+  <div class="club-left-aside">
+    <span class="content">
+    	<%= link_to club.name, city_club_path(club.city, club) %>
+    </span>
+     <span class="content">
+    	<%= club.address %>
+    </span>
+    <span class="timestamp">
+      Added <%= time_ago_in_words(club.created_at) %> ago.
+    </span>
+  </div>
+  <div class="club-right-aside">
+    <span class="thumb"><%= image_tag('hand_thumbsup.png', alt: 'Add comment') %>
+      <% unless club.events.first.nil? %>
+       +<%= club.events.first.thumbup %>
+      <% else %>
+        +0
+      <% end %>
+     </span>
+    <span class="thumb"><%= image_tag('hand_thumbsdown.png', alt: 'Add comment') %>
+      <% unless club.events.first.nil? %>
+       -<%= club.events.first.thumbdown %>
+      <% else %>
+        -0
+      <% end %>
+    </span>
+  </div>
 </li>
